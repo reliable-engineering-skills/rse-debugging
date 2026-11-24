@@ -1,19 +1,19 @@
 ---
 name: rse-debugging
-description: "Fix bugs from evidence: crashes, errors, exceptions, wrong results, failing or flaky tests, and performance regressions. Use whenever the user reports something broken or asks to fix, debug, diagnose or investigate a failure, even when the cause looks obvious. Reproduce it first with the smallest failing check, fix the cause rather than the symptom, and leave a regression test that fails on the original code and passes after the fix, even when you cannot run it here (then say it did not run). A request to investigate or explain produces a diagnosis, not a change. Builds on the reliable-software-engineering skill."
+description: "Fix bugs from evidence: crashes, errors, exceptions, wrong results, failing or flaky tests, and performance regressions. Use whenever the user reports something broken or asks to fix, debug, diagnose or investigate a failure, even when the cause looks obvious. Before editing any code, write the smallest failing test and run it to watch it fail; only then fix the cause rather than the symptom, and rerun it to watch it pass. Keep it as the regression test, even when you cannot run it here (then say it did not run). A request to investigate or explain produces a diagnosis, not a change. Builds on the reliable-software-engineering skill."
 metadata:
-  version: "3.2.0"
+  version: "3.3.0"
 ---
 
 # Debugging from a reproduction
 
 > Companion of the `reliable-software-engineering` skill, which must be installed alongside. Its core rules apply here; links into `../reliable-software-engineering/` point at its references.
 
-Use for any reported bug: something crashes, errors, returns a wrong result, fails or flakes. When the cause is obvious, sections 1 and 2 shrink to reading the trace and the code, but section 4 still applies: a fix without a regression test is unproven. A request to explain or investigate produces a diagnosis, not a change.
+Use for any reported bug: something crashes, errors, returns a wrong result, fails or flakes. When the cause is obvious, section 2 shrinks to reading the trace and the code, but the order does not change: watch a check fail before you edit the code, and keep it as the regression test. A fix without a failing-then-passing test is unproven. A request to explain or investigate produces a diagnosis, not a change.
 
 ## 1. Reproduce before you explain
 
-Read the exact error, stack trace, inputs, versions and environment first. Then build the smallest check that fails on this bug, and run it once to see it fail. Prefer, in order:
+Read the exact error, stack trace, inputs, versions and environment first. Then build the smallest check that fails on this bug, and run it once to see it fail before you change any code. Prefer, in order:
 
 - a failing test at the public seam that reaches the bug;
 - a script or command that feeds a captured input and compares the output;
@@ -44,7 +44,7 @@ If no failing check can be built, stop guessing. Report what you tried, what evi
 ## 4. Prove it
 
 - The reproduction now passes. Keep it as a regression test that fails on the original code and passes after the fix ([verification](../reliable-software-engineering/references/verification.md#detect-superficial-tests)).
-- When commands cannot run here, still write the regression test and the command that runs it, and say that neither ran.
+- When commands cannot run here, still write the regression test before the fix, with the command that runs it, and say that neither ran.
 - Run the relevant existing tests. For an intermittent bug, repeat the check enough times to make the claim meaningful, and state how many.
 - Report the symptom, the root cause and its evidence, the fix, the regression test, what ran and where, and what remains unverified.
 
