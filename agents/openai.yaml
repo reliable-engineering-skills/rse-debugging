@@ -1,0 +1,4 @@
+interface:
+  display_name: "RSE Debugging"
+  short_description: "Reproduce first, fix the cause, prove it with a regression test"
+  default_prompt: "Use $rse-debugging to reproduce the failure, find its cause with evidence, and fix it with a regression test."
